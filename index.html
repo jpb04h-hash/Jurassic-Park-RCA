@@ -4,187 +4,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Root Cause Analysis Training — Jurassic Park</title>
+<title>Root Cause Analysis Training - Jurassic Park</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0F1419;
-    --bar: #161B22;
-    --card: #1E2530;
-    --border: #2A3441;
-    --text: #E8E6E1;
-    --text2: #F5F3EF;
-    --muted: #B0B8C4;
-    --dim: #8892A0;
-    --red: #FF8A6E;
-    --blue: #5BC0E0;
-    --purple: #C48DD4;
-    --green: #4DD87E;
-    --gold: #F5D060;
-    --crim: #F07E72;
-    --red-bg: #E85D3A;
-    --blue-bg: #2E86AB;
-    --purple-bg: #7B2D8E;
-    --green-bg: #1B813E;
-    --gold-bg: #D4A017;
-    --crim-bg: #C44536;
-    --pass: #5FE88A;
-    --fail: #F07E72;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
-  .topbar { background:var(--bar); border-bottom:1px solid var(--border); padding:14px 16px; position:sticky; top:0; z-index:10; }
-  .topbar-inner { max-width:860px; margin:0 auto; }
-  .topbar-title { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-  .badge { background:var(--red-bg); border-radius:5px; padding:3px 9px; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; color:#fff; letter-spacing:1px; text-transform:uppercase; }
-  .topbar-label { font-size:15px; font-weight:700; color:var(--text2); letter-spacing:-0.3px; }
-  .step-nav { display:flex; gap:2px; flex-wrap:wrap; }
-  .step-btn { flex:1; min-width:40px; padding:7px 2px; border:none; cursor:pointer; border-radius:4px; font-family:inherit; font-size:9.5px; font-weight:600; transition:background 0.2s, color 0.2s; }
-  .main { max-width:860px; margin:0 auto; padding:24px 16px 60px; }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
-  .pareto-bar-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; cursor:pointer; transition:opacity 0.2s; }
-  .pareto-bar-row:hover { opacity:0.85; }
-  .pareto-label { width:200px; font-size:11px; color:var(--text); text-align:right; flex-shrink:0; line-height:1.3; }
-  .pareto-track { flex:1; height:18px; background:rgba(255,255,255,0.04); border-radius:4px; overflow:hidden; }
-  .pareto-fill { height:100%; border-radius:4px; transition:width 0.8s cubic-bezier(0.4,0,0.2,1); }
-  .pareto-score { width:32px; font-size:11px; font-weight:600; color:var(--text2); text-align:right; }
-  @media(max-width:600px) {
-    .main { padding:18px 12px 50px; }
-    .pareto-label { width:140px; font-size:10px; }
-  }
-  @media(max-width:400px) { .pareto-label { width:110px; font-size:9px; } }
+:root{--bg:#0F1419;--bar:#161B22;--card:#1E2530;--border:#2A3441;--text:#E8E6E1;--text2:#F5F3EF;--muted:#B0B8C4;--dim:#8892A0;--red:#FF8A6E;--blue:#5BC0E0;--purple:#C48DD4;--green:#4DD87E;--gold:#F5D060;--crim:#F07E72;--red-bg:#E85D3A;--blue-bg:#2E86AB;--purple-bg:#7B2D8E;--green-bg:#1B813E;--gold-bg:#D4A017;--crim-bg:#C44536;--pass:#5FE88A;--fail:#F07E72}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.topbar{background:var(--bar);border-bottom:1px solid var(--border);padding:14px 16px;position:sticky;top:0;z-index:10}
+.topbar-inner{max-width:860px;margin:0 auto}
+.topbar-title{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.badge{background:var(--red-bg);border-radius:5px;padding:3px 9px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#fff;letter-spacing:1px;text-transform:uppercase}
+.topbar-label{font-size:15px;font-weight:700;color:var(--text2);letter-spacing:-0.3px}
+.step-nav{display:flex;gap:2px;flex-wrap:wrap}
+.step-btn{flex:1;min-width:40px;padding:7px 2px;border:none;cursor:pointer;border-radius:4px;font-family:inherit;font-size:9.5px;font-weight:600}
+.main{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.pareto-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;transition:opacity 0.2s}
+.pareto-bar-row:hover{opacity:0.85}
+.pareto-label{width:200px;font-size:11px;color:var(--text);text-align:right;flex-shrink:0;line-height:1.3}
+.pareto-track{flex:1;height:18px;background:rgba(255,255,255,0.04);border-radius:4px;overflow:hidden}
+.pareto-fill{height:100%;border-radius:4px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1)}
+.pareto-score{width:32px;font-size:11px;font-weight:600;color:var(--text2);text-align:right}
+@media(max-width:600px){.main{padding:18px 12px 50px}.pareto-label{width:140px;font-size:10px}}
+@media(max-width:400px){.pareto-label{width:110px;font-size:9px}}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner">
-  <div class="topbar-title"><div class="badge">Training</div><span class="topbar-label">Root Cause Analysis — Jurassic Park</span></div>
-  <div class="step-nav" id="stepNav"></div>
+<div class="topbar-title"><div class="badge">Training</div><span class="topbar-label">Root Cause Analysis - Jurassic Park</span></div>
+<div class="step-nav" id="stepNav"></div>
 </div></div>
 <div class="main" id="mainContent"></div>
 <script>
-const STEPS=["intro","fishbone","pareto","prioritize","fivewhys","verify","rootcause"];
-const STEP_LABELS=["Intro","Fishbone","Pareto","Prioritize","5 Whys","Verify","Root Cause"];
-const CATEGORIES=[
-  {name:"People",icon:"👤",color:"#FF8A6E",bg:"#E85D3A",causes:[
-    {id:"p1",text:"Nedry sabotaged control systems",selected:true,lane:"human",impact:9,freq:3},
-    {id:"p2",text:"Nedry underpaid & disgruntled",selected:true,lane:"human",impact:8,freq:4},
-    {id:"p3",text:"No background checks for critical staff",selected:false,impact:5,freq:3},
-    {id:"p4",text:"Hammond's overconfidence in technology",selected:true,lane:"human",impact:9,freq:5},
-    {id:"p5",text:"Insufficient staffing for crisis response",selected:false,impact:4,freq:3},
-    {id:"p6",text:"No whistleblower / grievance mechanism",selected:true,lane:"human",impact:7,freq:4},
-  ]},
-  {name:"Process",icon:"⚙️",color:"#5BC0E0",bg:"#2E86AB",causes:[
-    {id:"pr1",text:"No integrated risk management framework",selected:true,lane:"human",impact:10,freq:5},
-    {id:"pr2",text:"No crisis simulation or drills conducted",selected:true,lane:"environmental",impact:8,freq:4},
-    {id:"pr3",text:"No access-control auditing process",selected:true,lane:"human",impact:8,freq:4},
-    {id:"pr4",text:"Departments operated in silos",selected:true,lane:"human",impact:8,freq:5},
-    {id:"pr5",text:"No escalation protocol for system failures",selected:false,impact:5,freq:3},
-    {id:"pr6",text:"No visitor evacuation plan tested",selected:false,impact:4,freq:2},
-  ]},
-  {name:"Technology",icon:"🔌",color:"#C48DD4",bg:"#7B2D8E",causes:[
-    {id:"t1",text:"Centralized power grid — single point of failure",selected:true,lane:"technical",impact:10,freq:5},
-    {id:"t2",text:"No redundant / backup power systems",selected:true,lane:"technical",impact:10,freq:5},
-    {id:"t3",text:"Fence systems lacked mechanical fail-safes",selected:true,lane:"technical",impact:9,freq:4},
-    {id:"t4",text:"Security system could be disabled by one user",selected:true,lane:"human",impact:9,freq:4},
-    {id:"t5",text:"No real-time dinosaur tracking independent of fences",selected:false,impact:5,freq:3},
-    {id:"t6",text:"Automated systems lacked manual override capability",selected:false,impact:4,freq:3},
-  ]},
-  {name:"Environment",icon:"🌀",color:"#4DD87E",bg:"#1B813E",causes:[
-    {id:"e1",text:"Tropical storm struck during operations",selected:true,lane:"environmental",impact:10,freq:4},
-    {id:"e2",text:"Infrastructure not weatherproofed",selected:true,lane:"environmental",impact:9,freq:4},
-    {id:"e3",text:"No environmental stress testing performed",selected:true,lane:"environmental",impact:8,freq:5},
-    {id:"e4",text:"Remote island location delayed external help",selected:false,impact:5,freq:5},
-    {id:"e5",text:"Biological risks of live dinosaurs underestimated",selected:false,impact:6,freq:3},
-  ]},
-  {name:"Management",icon:"📋",color:"#F5D060",bg:"#D4A017",causes:[
-    {id:"m1",text:"Cost-cutting prioritized over safety redundancy",selected:true,lane:"technical",impact:9,freq:5},
-    {id:"m2",text:"No independent safety oversight / audits",selected:true,lane:"human",impact:9,freq:5},
-    {id:"m3",text:"Employee concerns systematically dismissed",selected:true,lane:"human",impact:8,freq:5},
-    {id:"m4",text:"Leadership lacked risk management expertise",selected:false,impact:6,freq:4},
-    {id:"m5",text:"'Spared no expense' masked real gaps",selected:true,lane:"environmental",impact:8,freq:5},
-  ]},
-  {name:"Measurement",icon:"📊",color:"#F07E72",bg:"#C44536",causes:[
-    {id:"ms1",text:"No KPIs for system resilience or safety",selected:true,lane:"technical",impact:8,freq:5},
-    {id:"ms2",text:"Breeding anomalies went undetected",selected:false,impact:5,freq:2},
-    {id:"ms3",text:"No monitoring of employee satisfaction",selected:true,lane:"human",impact:7,freq:5},
-    {id:"ms4",text:"Containment integrity never independently verified",selected:false,impact:6,freq:3},
-  ]},
+var STEPS=["intro","fishbone","pareto","prioritize","fivewhys","verify","rootcause"];
+var STEP_LABELS=["Intro","Fishbone","Pareto","Prioritize","5 Whys","Verify","Root Cause"];
+var CATEGORIES=[
+{name:"People",icon:"\u{1F464}",color:"#FF8A6E",bg:"#E85D3A",causes:[
+{id:"p1",text:"Nedry sabotaged control systems",selected:true,lane:"human",impact:9,freq:3},
+{id:"p2",text:"Nedry underpaid and disgruntled",selected:true,lane:"human",impact:8,freq:4},
+{id:"p3",text:"No background checks for critical staff",selected:false,impact:5,freq:3},
+{id:"p4",text:"Hammond overconfidence in technology",selected:true,lane:"human",impact:9,freq:5},
+{id:"p5",text:"Insufficient staffing for crisis response",selected:false,impact:4,freq:3},
+{id:"p6",text:"No whistleblower / grievance mechanism",selected:true,lane:"human",impact:7,freq:4}
+]},
+{name:"Process",icon:"\u2699\uFE0F",color:"#5BC0E0",bg:"#2E86AB",causes:[
+{id:"pr1",text:"No integrated risk management framework",selected:true,lane:"human",impact:10,freq:5},
+{id:"pr2",text:"No crisis simulation or drills conducted",selected:true,lane:"environmental",impact:8,freq:4},
+{id:"pr3",text:"No access-control auditing process",selected:true,lane:"human",impact:8,freq:4},
+{id:"pr4",text:"Departments operated in silos",selected:true,lane:"human",impact:8,freq:5},
+{id:"pr5",text:"No escalation protocol for system failures",selected:false,impact:5,freq:3},
+{id:"pr6",text:"No visitor evacuation plan tested",selected:false,impact:4,freq:2}
+]},
+{name:"Technology",icon:"\u{1F50C}",color:"#C48DD4",bg:"#7B2D8E",causes:[
+{id:"t1",text:"Centralized power grid - single point of failure",selected:true,lane:"technical",impact:10,freq:5},
+{id:"t2",text:"No redundant / backup power systems",selected:true,lane:"technical",impact:10,freq:5},
+{id:"t3",text:"Fence systems lacked mechanical fail-safes",selected:true,lane:"technical",impact:9,freq:4},
+{id:"t4",text:"Security system could be disabled by one user",selected:true,lane:"human",impact:9,freq:4},
+{id:"t5",text:"No real-time dinosaur tracking independent of fences",selected:false,impact:5,freq:3},
+{id:"t6",text:"Automated systems lacked manual override capability",selected:false,impact:4,freq:3}
+]},
+{name:"Environment",icon:"\u{1F300}",color:"#4DD87E",bg:"#1B813E",causes:[
+{id:"e1",text:"Tropical storm struck during operations",selected:true,lane:"environmental",impact:10,freq:4},
+{id:"e2",text:"Infrastructure not weatherproofed",selected:true,lane:"environmental",impact:9,freq:4},
+{id:"e3",text:"No environmental stress testing performed",selected:true,lane:"environmental",impact:8,freq:5},
+{id:"e4",text:"Remote island location delayed external help",selected:false,impact:5,freq:5},
+{id:"e5",text:"Biological risks of live dinosaurs underestimated",selected:false,impact:6,freq:3}
+]},
+{name:"Management",icon:"\u{1F4CB}",color:"#F5D060",bg:"#D4A017",causes:[
+{id:"m1",text:"Cost-cutting prioritized over safety redundancy",selected:true,lane:"technical",impact:9,freq:5},
+{id:"m2",text:"No independent safety oversight / audits",selected:true,lane:"human",impact:9,freq:5},
+{id:"m3",text:"Employee concerns systematically dismissed",selected:true,lane:"human",impact:8,freq:5},
+{id:"m4",text:"Leadership lacked risk management expertise",selected:false,impact:6,freq:4},
+{id:"m5",text:"Spared no expense masked real gaps",selected:true,lane:"environmental",impact:8,freq:5}
+]},
+{name:"Measurement",icon:"\u{1F4CA}",color:"#F07E72",bg:"#C44536",causes:[
+{id:"ms1",text:"No KPIs for system resilience or safety",selected:true,lane:"technical",impact:8,freq:5},
+{id:"ms2",text:"Breeding anomalies went undetected",selected:false,impact:5,freq:2},
+{id:"ms3",text:"No monitoring of employee satisfaction",selected:true,lane:"human",impact:7,freq:5},
+{id:"ms4",text:"Containment integrity never independently verified",selected:false,impact:6,freq:3}
+]}
 ];
-const LANES={
-  technical:{name:"Technical / System Failure",color:"#C48DD4",bg:"#7B2D8E",icon:"🔌",sources:"Technology + Measurement + Management",whys:[
-    {q:"Why did the containment systems fail?",a:"The electric fences lost power, and no backup system existed to maintain containment barriers."},
-    {q:"Why was there no backup system?",a:"The park relied on a single centralized power grid. The architecture had no redundancy — one failure cascaded across every system park-wide."},
-    {q:"Why was a single-grid architecture chosen?",a:"System design prioritized cost-effectiveness and streamlined operations. No one challenged the architecture because the budget didn't allocate for redundancy, and no resilience KPIs existed to flag the gap."},
-    {q:"Why weren't resilience requirements built into the design specs?",a:"Leadership operated in silos — Hammond focused on spectacle, Arnold on daily operations. There was no integrated risk framework to evaluate systemic vulnerabilities across departments."},
-    {q:"Why did no cross-functional risk review exist?",a:"Overconfidence in engineering excellence ('spared no expense') created a false sense of security. Decision-makers assumed technical brilliance alone would handle edge cases, so resilience was never treated as a design requirement."},
-  ]},
-  environmental:{name:"Environmental / Planning Failure",color:"#4DD87E",bg:"#1B813E",icon:"🌀",sources:"Environment + Process + Management",whys:[
-    {q:"Why did the tropical storm cause system-wide damage?",a:"The park's infrastructure was not weatherproofed or hardened for severe tropical weather — a foreseeable threat on a tropical island."},
-    {q:"Why wasn't the infrastructure weatherproofed?",a:"No environmental stress testing or crisis simulations were ever conducted. The park was never tested against the conditions its own location guaranteed."},
-    {q:"Why were no stress tests or crisis drills performed?",a:"There was no risk assessment process that accounted for environmental threats. The tropical storm scenario was treated as unlikely despite the island's geography."},
-    {q:"Why was a foreseeable environmental risk treated as unlikely?",a:"The 'spared no expense' rhetoric created overconfidence — leadership believed engineering quality alone would handle any conditions, so environmental planning was deprioritized."},
-    {q:"Why did overconfidence override basic risk planning?",a:"No independent safety oversight existed to challenge leadership assumptions. Without external audits or a culture of questioning, blind spots became systemic."},
-  ]},
-  human:{name:"Human / Organizational Failure",color:"#FF8A6E",bg:"#E85D3A",icon:"👤",sources:"People + Process + Technology + Management + Measurement",whys:[
-    {q:"Why was Nedry able to sabotage the entire park?",a:"The security system could be disabled by a single user. No access-control auditing, role separation, or monitoring existed to prevent or detect insider actions."},
-    {q:"Why did Nedry choose to sabotage the system?",a:"Nedry was disgruntled — underpaid and undervalued. His grievances went unaddressed, and no whistleblower or dispute resolution mechanism existed."},
-    {q:"Why were Nedry's grievances ignored?",a:"Employee concerns were systematically dismissed. Management had no process for monitoring employee satisfaction or handling compensation disputes — especially for staff with critical system access."},
-    {q:"Why did management lack these basic HR and security safeguards?",a:"Departments operated in silos with no integrated risk framework. No one connected 'unhappy employee' + 'total system access' + 'no oversight' as a compounding risk."},
-    {q:"Why did the organization fail to see this interconnected risk?",a:"The culture deprioritized employee well-being and internal security in favor of innovation and cost containment. Without independent oversight, the organization was blind to the human risks it was creating."},
-  ]}
+var LANES={
+technical:{name:"Technical / System Failure",color:"#C48DD4",bg:"#7B2D8E",icon:"\u{1F50C}",sources:"Technology + Measurement + Management",whys:[
+{q:"Why did the containment systems fail?",a:"The electric fences lost power, and no backup system existed to maintain containment barriers."},
+{q:"Why was there no backup system?",a:"The park relied on a single centralized power grid. The architecture had no redundancy - one failure cascaded across every system park-wide."},
+{q:"Why was a single-grid architecture chosen?",a:"System design prioritized cost-effectiveness and streamlined operations. No one challenged the architecture because the budget did not allocate for redundancy, and no resilience KPIs existed to flag the gap."},
+{q:"Why were resilience requirements not built into the design specs?",a:"Leadership operated in silos - Hammond focused on spectacle, Arnold on daily operations. There was no integrated risk framework to evaluate systemic vulnerabilities across departments."},
+{q:"Why did no cross-functional risk review exist?",a:"Overconfidence in engineering excellence (spared no expense) created a false sense of security. Decision-makers assumed technical brilliance alone would handle edge cases, so resilience was never treated as a design requirement."}
+]},
+environmental:{name:"Environmental / Planning Failure",color:"#4DD87E",bg:"#1B813E",icon:"\u{1F300}",sources:"Environment + Process + Management",whys:[
+{q:"Why did the tropical storm cause system-wide damage?",a:"The park infrastructure was not weatherproofed or hardened for severe tropical weather - a foreseeable threat on a tropical island."},
+{q:"Why was the infrastructure not weatherproofed?",a:"No environmental stress testing or crisis simulations were ever conducted. The park was never tested against the conditions its own location guaranteed."},
+{q:"Why were no stress tests or crisis drills performed?",a:"There was no risk assessment process that accounted for environmental threats. The tropical storm scenario was treated as unlikely despite the island geography."},
+{q:"Why was a foreseeable environmental risk treated as unlikely?",a:"The spared no expense rhetoric created overconfidence - leadership believed engineering quality alone would handle any conditions, so environmental planning was deprioritized."},
+{q:"Why did overconfidence override basic risk planning?",a:"No independent safety oversight existed to challenge leadership assumptions. Without external audits or a culture of questioning, blind spots became systemic."}
+]},
+human:{name:"Human / Organizational Failure",color:"#FF8A6E",bg:"#E85D3A",icon:"\u{1F464}",sources:"People + Process + Technology + Management + Measurement",whys:[
+{q:"Why was Nedry able to sabotage the entire park?",a:"The security system could be disabled by a single user. No access-control auditing, role separation, or monitoring existed to prevent or detect insider actions."},
+{q:"Why did Nedry choose to sabotage the system?",a:"Nedry was disgruntled - underpaid and undervalued. His grievances went unaddressed, and no whistleblower or dispute resolution mechanism existed."},
+{q:"Why were Nedry grievances ignored?",a:"Employee concerns were systematically dismissed. Management had no process for monitoring employee satisfaction or handling compensation disputes - especially for staff with critical system access."},
+{q:"Why did management lack these basic HR and security safeguards?",a:"Departments operated in silos with no integrated risk framework. No one connected unhappy employee + total system access + no oversight as a compounding risk."},
+{q:"Why did the organization fail to see this interconnected risk?",a:"The culture deprioritized employee well-being and internal security in favor of innovation and cost containment. Without independent oversight, the organization was blind to the human risks it was creating."}
+]}
 };
-const BAD_CHAIN=[{q:"Why did dinosaurs escape?",a:"Fences lost power."},{q:"Why did fences lose power?",a:"Nedry disabled the system."},{q:"Why did Nedry disable the system?",a:"He was underpaid."},{q:"Why was he underpaid?",a:"Budget was tight."},{q:"Why was the budget tight?",a:"The park was expensive to build."}];
-const TESTS=[
-  {id:"therefore",name:"Therefore Test",subtitle:"Reverse Logic Check",icon:"🔄",color:"#5BC0E0",question:"Read the chain bottom-up. Does each step logically cause the next?",howItWorks:"Start at the root cause and read upward: 'Root cause, THEREFORE Why 4, THEREFORE Why 3…' all the way to the effect. Every link should feel like a necessary and sufficient cause.",failMeans:"A link in your chain is a logical leap. You conflated two causes or skipped a step.",whatToDo:"Go back to the broken link and re-answer that specific 'why.' Stay in 5 Whys — just fix the chain.",goodResult:{pass:true,detail:"All 3 lanes read logically bottom-up. Each step is a necessary cause of the one above it."},badResult:{pass:true,detail:"Surprisingly, this PASSES! 'Park expensive → budget tight → Nedry underpaid → sabotage → fences down → escape' sounds perfectly logical. This is exactly why the Therefore Test alone is not enough."}},
-  {id:"sowhat",name:"So What? Test",subtitle:"Sufficiency Check",icon:"🎯",color:"#F5D060",question:"If we fix ONLY this root cause, does the problem fully go away?",howItWorks:"At your proposed root cause, ask: 'If we had addressed this single thing, would the incident have been completely prevented?' If 'not entirely,' you haven't gone deep enough or you're missing a parallel lane.",failMeans:"Your root cause is incomplete. You've found a contributing factor but not the full picture.",whatToDo:"Go back to your fishbone. You likely have unaccounted high-priority causes that need their own lane. Add lanes to capture the missing factors.",goodResult:{pass:true,detail:"Fixing leadership culture + integrated risk management would have driven redundant systems, stress testing, AND employee safeguards. All three paths to failure are blocked."},badResult:{pass:false,detail:"FAILS. If we made the budget bigger, Nedry might be happier — but the tropical storm still knocks out the non-redundant, non-weatherproofed power grid. Dinosaurs still escape."}},
-  {id:"evidence",name:"Evidence Test",subtitle:"Data Verification",icon:"🔍",color:"#C48DD4",question:"What data or evidence supports each 'why' answer?",howItWorks:"For every answer, ask: 'How do we KNOW this is true?' Can you point to incident logs, interviews, metrics, design docs? If the answer is 'it seems logical,' you may be on a plausible-but-wrong path.",failMeans:"You followed intuition instead of evidence. The chain feels right but may be factually wrong. This is the most dangerous failure.",whatToDo:"Pause the 5 Whys and gather data — pull logs, interview stakeholders, review records. If evidence isn't available, switch to Fault Tree Analysis (FTA) to map ALL possible paths, or Pareto Analysis to rank factors by actual data.",goodResult:{pass:true,detail:"Each answer is evidence-backed: power grid design docs show no redundancy, weather records confirm the storm, Nedry's communications confirm grievances, org charts confirm siloed departments."},badResult:{pass:false,detail:"FAILS. 'Budget was tight' — was it? Hammond literally said 'spared no expense.' There's no evidence the budget was actually constrained. The chain followed a plausible narrative rather than verified facts."}},
-  {id:"control",name:"Control Test",subtitle:"Counterfactual Check (Strongest)",icon:"🛡️",color:"#4DD87E",question:"If this root cause had NOT been present, would the problem still have occurred?",howItWorks:"Imagine a world where your root cause doesn't exist. Does the incident still happen? Apply at every level. If the problem persists without your root cause, it's not actually root.",failMeans:"Your proposed root cause isn't the root. The problem would have happened anyway through a different path.",whatToDo:"Two options: (1) Keep digging — ask another 'why.' (2) Add parallel lanes. If multiple tests fail, escalate to Fault Tree Analysis (FTA), FMEA, or a full Systems Analysis.",goodResult:{pass:true,detail:"If leadership had an integrated risk culture: they'd have required redundancy (tech), stress-tested for storms (env), and caught the Nedry risk (human). All three failure paths are blocked. Problem doesn't happen."},badResult:{pass:false,detail:"FAILS HARD. If the park had a bigger budget but the same culture — still no redundancy, still no weatherproofing, still no employee monitoring. More money without risk awareness changes nothing. Dinosaurs still escape."}}
+var BAD_CHAIN=[{q:"Why did dinosaurs escape?",a:"Fences lost power."},{q:"Why did fences lose power?",a:"Nedry disabled the system."},{q:"Why did Nedry disable the system?",a:"He was underpaid."},{q:"Why was he underpaid?",a:"Budget was tight."},{q:"Why was the budget tight?",a:"The park was expensive to build."}];
+var TESTS=[
+{id:"therefore",name:"Therefore Test",subtitle:"Reverse Logic Check",icon:"\u{1F504}",color:"#5BC0E0",question:"Read the chain bottom-up. Does each step logically cause the next?",howItWorks:"Start at the root cause and read upward. Every link should feel like a necessary and sufficient cause.",failMeans:"A link in your chain is a logical leap. You conflated two causes or skipped a step.",whatToDo:"Go back to the broken link and re-answer that specific why. Stay in 5 Whys - just fix the chain.",goodResult:{pass:true,detail:"All 3 lanes read logically bottom-up. Each step is a necessary cause of the one above it."},badResult:{pass:true,detail:"Surprisingly, this PASSES! The chain sounds perfectly logical. This is exactly why the Therefore Test alone is not enough."}},
+{id:"sowhat",name:"So What? Test",subtitle:"Sufficiency Check",icon:"\u{1F3AF}",color:"#F5D060",question:"If we fix ONLY this root cause, does the problem fully go away?",howItWorks:"At your proposed root cause, ask: If we had addressed this single thing, would the incident have been completely prevented?",failMeans:"Your root cause is incomplete. You found a contributing factor but not the full picture.",whatToDo:"Go back to your fishbone. You likely have unaccounted high-priority causes that need their own lane.",goodResult:{pass:true,detail:"Fixing leadership culture + integrated risk management would have driven redundant systems, stress testing, AND employee safeguards. All three paths to failure are blocked."},badResult:{pass:false,detail:"FAILS. If we made the budget bigger, Nedry might be happier - but the tropical storm still knocks out the non-redundant, non-weatherproofed power grid. Dinosaurs still escape."}},
+{id:"evidence",name:"Evidence Test",subtitle:"Data Verification",icon:"\u{1F50D}",color:"#C48DD4",question:"What data or evidence supports each why answer?",howItWorks:"For every answer, ask: How do we KNOW this is true? Can you point to incident logs, interviews, metrics, design docs?",failMeans:"You followed intuition instead of evidence. The chain feels right but may be factually wrong.",whatToDo:"Pause the 5 Whys and gather data - pull logs, interview stakeholders, review records.",goodResult:{pass:true,detail:"Each answer is evidence-backed: power grid design docs show no redundancy, weather records confirm the storm, Nedry communications confirm grievances, org charts confirm siloed departments."},badResult:{pass:false,detail:"FAILS. Budget was tight - was it? Hammond literally said spared no expense. There is no evidence the budget was actually constrained."}},
+{id:"control",name:"Control Test",subtitle:"Counterfactual Check (Strongest)",icon:"\u{1F6E1}\uFE0F",color:"#4DD87E",question:"If this root cause had NOT been present, would the problem still have occurred?",howItWorks:"Imagine a world where your root cause does not exist. Does the incident still happen?",failMeans:"Your proposed root cause is not the root. The problem would have happened anyway through a different path.",whatToDo:"Two options: (1) Keep digging. (2) Add parallel lanes. If multiple tests fail, escalate to FTA, FMEA, or Systems Analysis.",goodResult:{pass:true,detail:"If leadership had an integrated risk culture: they would have required redundancy (tech), stress-tested for storms (env), and caught the Nedry risk (human). All three failure paths are blocked."},badResult:{pass:false,detail:"FAILS HARD. If the park had a bigger budget but the same culture - still no redundancy, still no weatherproofing, still no employee monitoring. Dinosaurs still escape."}}
 ];
-const DECISION_TREE=[
-  {test:"Therefore Test fails",icon:"🔄",color:"#5BC0E0",action:"Fix the chain",detail:"Go back to the broken link. Re-answer that 'why.' Stay in 5 Whys.",tool:"5 Whys (same tool)"},
-  {test:"So What? Test fails",icon:"🎯",color:"#F5D060",action:"Add lanes",detail:"Return to your fishbone. Find unaccounted causes. Build parallel lanes.",tool:"Fishbone → 5 Whys"},
-  {test:"Evidence Test fails",icon:"🔍",color:"#C48DD4",action:"Gather data first",detail:"Pause analysis. Pull logs, interview people, review records.",tool:"FTA or Pareto Analysis"},
-  {test:"Control Test fails",icon:"🛡️",color:"#4DD87E",action:"Keep digging or add lanes",detail:"You found a contributing factor, not the root cause. Go deeper or broaden.",tool:"5 Whys deeper, or FTA / FMEA"},
-  {test:"Multiple tests fail",icon:"⚠️",color:"#F07E72",action:"Escalate your method",detail:"Too complex for 5 Whys alone. Use a structured systems analysis.",tool:"FTA, FMEA, or Systems Analysis"},
+var DECISION_TREE=[
+{test:"Therefore Test fails",icon:"\u{1F504}",color:"#5BC0E0",action:"Fix the chain",detail:"Go back to the broken link. Re-answer that why. Stay in 5 Whys.",tool:"5 Whys"},
+{test:"So What? Test fails",icon:"\u{1F3AF}",color:"#F5D060",action:"Add lanes",detail:"Return to your fishbone. Find unaccounted causes. Build parallel lanes.",tool:"Fishbone + 5 Whys"},
+{test:"Evidence Test fails",icon:"\u{1F50D}",color:"#C48DD4",action:"Gather data first",detail:"Pause analysis. Pull logs, interview people, review records.",tool:"FTA or Pareto"},
+{test:"Control Test fails",icon:"\u{1F6E1}\uFE0F",color:"#4DD87E",action:"Keep digging or add lanes",detail:"You found a contributing factor, not the root cause.",tool:"5 Whys or FTA"},
+{test:"Multiple tests fail",icon:"\u26A0\uFE0F",color:"#F07E72",action:"Escalate your method",detail:"Too complex for 5 Whys alone.",tool:"FTA / FMEA"}
 ];
-const ROOT_CAUSE_TEXT="Decision-makers over-prioritized innovation and cost containment, lacked a holistic risk management framework, and fostered a culture that ignored environmental realities, employee grievances, and internal security. The disaster was not caused by any single failure but by the simultaneous, undetected convergence of technical fragility, environmental vulnerability, and organizational blind spots.";
-const COUNTERMEASURES=[
-  {lane:"Technical",color:"#C48DD4",bg:"#7B2D8E",items:["Decentralized power architecture with independent backup per zone","Mechanical fail-safes on all containment barriers (power-independent)","Resilience KPIs built into system design requirements"]},
-  {lane:"Environmental",color:"#4DD87E",bg:"#1B813E",items:["Mandatory environmental stress testing before operations begin","Annual crisis simulations for all foreseeable scenarios","Independent safety audits with authority to halt operations"]},
-  {lane:"Human",color:"#FF8A6E",bg:"#E85D3A",items:["Role-based access controls — no single user can disable park-wide systems","Employee satisfaction monitoring with escalation triggers for critical-access staff","Whistleblower mechanism and formal grievance resolution process"]},
+var ROOT_CAUSE_TEXT="Decision-makers over-prioritized innovation and cost containment, lacked a holistic risk management framework, and fostered a culture that ignored environmental realities, employee grievances, and internal security. The disaster was not caused by any single failure but by the simultaneous, undetected convergence of technical fragility, environmental vulnerability, and organizational blind spots.";
+var COUNTERMEASURES=[
+{lane:"Technical",color:"#C48DD4",bg:"#7B2D8E",items:["Decentralized power architecture with independent backup per zone","Mechanical fail-safes on all containment barriers (power-independent)","Resilience KPIs built into system design requirements"]},
+{lane:"Environmental",color:"#4DD87E",bg:"#1B813E",items:["Mandatory environmental stress testing before operations begin","Annual crisis simulations for all foreseeable scenarios","Independent safety audits with authority to halt operations"]},
+{lane:"Human",color:"#FF8A6E",bg:"#E85D3A",items:["Role-based access controls - no single user can disable park-wide systems","Employee satisfaction monitoring with escalation triggers for critical-access staff","Whistleblower mechanism and formal grievance resolution process"]}
 ];
 
-let currentStep=0,expandedCats={},activeLane=“technical”,revealedWhys={},verifyMode=“good”,expandedTests={},showDecisionTree=false,showCountermeasures=false,paretoAnimated=false,paretoShowCutoff=false,paretoExpandedItem=null;
+var currentStep=0,expandedCats={},activeLane=“technical”,revealedWhys={},verifyMode=“good”,expandedTests={},showDecisionTree=false,showCountermeasures=false,paretoAnimated=false,paretoShowCutoff=false,paretoExpandedItem=null;
+
+function copyObj(src,extra){var o={};for(var k in src){o[k]=src[k];}if(extra){for(var k in extra){o[k]=extra[k];}}return o;}
 
 function buildParetoData(){
-const all=CATEGORIES.flatMap(cat=>cat.causes.map(c=>({…c,category:cat.name,catColor:cat.color,catBg:cat.bg,score:c.impact*c.freq})));
-all.sort((a,b)=>b.score-a.score);
-const total=all.reduce((s,c)=>s+c.score,0);
-let cum=0;
-all.forEach(c=>{cum+=c.score;c.cumPct=Math.round((cum/total)*100);c.pct=Math.round((c.score/total)*100);});
-return{items:all,total};
+var all=[];
+for(var ci=0;ci<CATEGORIES.length;ci++){
+var cat=CATEGORIES[ci];
+for(var xi=0;xi<cat.causes.length;xi++){
+var c=copyObj(cat.causes[xi],{category:cat.name,catColor:cat.color,catBg:cat.bg,score:cat.causes[xi].impact*cat.causes[xi].freq});
+all.push(c);
+}}
+all.sort(function(a,b){return b.score-a.score;});
+var total=0;for(var i=0;i<all.length;i++){total+=all[i].score;}
+var cum=0;
+for(var i=0;i<all.length;i++){cum+=all[i].score;all[i].cumPct=Math.round((cum/total)*100);all[i].pct=Math.round((all[i].score/total)*100);}
+return{items:all,total:total};
 }
-const PARETO=buildParetoData();
+var PARETO=buildParetoData();
 
 function render(){renderStepNav();renderContent();}
 function renderStepNav(){
-document.getElementById(“stepNav”).innerHTML=STEPS.map((s,i)=>{
-let bg,color;
+var html=””;
+for(var i=0;i<STEPS.length;i++){
+var bg,color;
 if(i===currentStep){bg=”#E85D3A”;color=”#fff”;}
 else if(i<currentStep){bg=”#4DD87E22”;color=”#4DD87E”;}
 else{bg=”#1E2530”;color=”#8892A0”;}
-return`<button class="step-btn" onclick="goStep(${i})" style="background:${bg};color:${color}">${STEP_LABELS[i]}</button>`;
-}).join(””);
+html+=’<button class="step-btn" onclick="goStep('+i+')" style="background:'+bg+';color:'+color+'">’+STEP_LABELS[i]+’</button>’;
+}
+document.getElementById(“stepNav”).innerHTML=html;
 }
 function goStep(i){
 currentStep=i;
-if(i===2){paretoAnimated=false;setTimeout(()=>{paretoAnimated=true;render();},50);}
+if(i===2){paretoAnimated=false;setTimeout(function(){paretoAnimated=true;render();},50);}
 render();window.scrollTo({top:0,behavior:‘smooth’});
 }
 function renderContent(){
-const main=document.getElementById(“mainContent”);
-const step=STEPS[currentStep];
-let html=””;
+var main=document.getElementById(“mainContent”);
+var step=STEPS[currentStep];
+var html=””;
 if(step===“intro”)html=renderIntro();
 else if(step===“fishbone”)html=renderFishbone();
 else if(step===“pareto”)html=renderPareto();
@@ -198,231 +182,207 @@ main.style.animation=“none”;main.offsetHeight;main.style.animation=“fadeUp
 }
 
 function renderIntro(){
-const a=[
-{n:“1”,t:“Fishbone Diagram”,d:“Cast a wide net — brainstorm ALL potential causes across 6 categories (divergent thinking).”},
-{n:“2”,t:“Pareto Analysis”,d:“Score each cause by Impact × Frequency. Rank them to find the vital few that drive ~80% of the risk.”},
-{n:“3”,t:“Prioritize into Lanes”,d:“Group the top Pareto causes into 3 investigation lanes that cross category boundaries (convergent thinking).”},
-{n:“4”,t:“5 Whys Analysis”,d:“Drill deep — trace each lane from symptom to systemic root cause (deep thinking).”},
-{n:“5”,t:“Verify Your Logic”,d:“Run 4 tests to confirm you’ve reached the TRUE root cause — and learn what to do if you haven’t.”},
-{n:“6”,t:“Root Cause & Countermeasures”,d:“See where all lanes converge and define corrective actions.”},
+var steps=[
+{n:“1”,t:“Fishbone Diagram”,d:“Cast a wide net - brainstorm ALL potential causes across 6 categories.”},
+{n:“2”,t:“Pareto Analysis”,d:“Score each cause by Impact x Frequency. Rank them to find the vital few that drive ~80% of the risk.”},
+{n:“3”,t:“Prioritize into Lanes”,d:“Group the top Pareto causes into 3 investigation lanes that cross category boundaries.”},
+{n:“4”,t:“5 Whys Analysis”,d:“Drill deep - trace each lane from symptom to systemic root cause.”},
+{n:“5”,t:“Verify Your Logic”,d:“Run 4 tests to confirm you reached the TRUE root cause.”},
+{n:“6”,t:“Root Cause and Countermeasures”,d:“See where all lanes converge and define corrective actions.”}
 ];
-return`<div style="border-radius:12px;padding:24px 20px;margin-bottom:24px;background:linear-gradient(135deg,#E85D3A18 0%,#7B2D8E12 100%);border:1px solid #E85D3A33">
-<h2 style="font-size:19px;font-weight:700;margin:0 0 6px;color:var(--text2)">What are we solving?</h2>
-<p style="font-size:14px;color:#D1D5DB;line-height:1.7;margin:0">When dinosaurs escaped their enclosures due to the failure of critical containment systems, Jurassic Park faced catastrophic consequences: <strong style="color:var(--red)">at least five fatalities</strong> and a grave threat to the lives of guests, staff, and dinosaurs. The incident resulted in safety breaches, complete operational shutdown, and <strong style="color:var(--red)">hundreds of millions of dollars in damages</strong>.</p>
-
-  </div>
-  <h3 style="font-size:15px;font-weight:600;margin-bottom:12px;color:var(--gold)">Our approach</h3>
-  ${a.map(x=>`<div style="display:flex;gap:12px;background:var(--card);border-radius:8px;padding:12px 14px;border:1px solid var(--border);margin-bottom:8px">
-    <div style="width:26px;height:26px;border-radius:50%;background:var(--red-bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;color:#fff">${x.n}</div>
-    <div><div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:2px">${x.t}</div><div style="font-size:12px;color:var(--muted);line-height:1.5">${x.d}</div></div>
-  </div>`).join("")}
-  <div style="border-radius:8px;padding:12px 16px;font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px;background:#1B813E22;border:1px solid #1B813E44">
-    <strong style="color:var(--green)">Key lesson:</strong> Root causes don't respect category boundaries. The fishbone helps you <em>find</em> causes; the Pareto helps you <em>focus</em>; the 5 Whys helps you <em>connect</em> them; the verification tests help you <em>prove</em> them.
-  </div>`;
+var h=’<div style="border-radius:12px;padding:24px 20px;margin-bottom:24px;background:linear-gradient(135deg,#E85D3A18 0%,#7B2D8E12 100%);border:1px solid #E85D3A33">’;
+h+=’<h2 style="font-size:19px;font-weight:700;margin:0 0 6px;color:var(--text2)">What are we solving?</h2>’;
+h+=’<p style="font-size:14px;color:#D1D5DB;line-height:1.7;margin:0">When dinosaurs escaped their enclosures due to the failure of critical containment systems, Jurassic Park faced catastrophic consequences: <strong style="color:var(--red)">at least five fatalities</strong> and a grave threat to the lives of guests, staff, and dinosaurs. The incident resulted in safety breaches, complete operational shutdown, and <strong style="color:var(--red)">hundreds of millions of dollars in damages</strong>.</p></div>’;
+h+=’<h3 style="font-size:15px;font-weight:600;margin-bottom:12px;color:var(--gold)">Our approach</h3>’;
+for(var i=0;i<steps.length;i++){
+var s=steps[i];
+h+=’<div style="display:flex;gap:12px;background:var(--card);border-radius:8px;padding:12px 14px;border:1px solid var(--border);margin-bottom:8px"><div style="width:26px;height:26px;border-radius:50%;background:var(--red-bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;color:#fff">’+s.n+’</div><div><div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:2px">’+s.t+’</div><div style="font-size:12px;color:var(--muted);line-height:1.5">’+s.d+’</div></div></div>’;
+}
+h+=’<div style="border-radius:8px;padding:12px 16px;font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px;background:#1B813E22;border:1px solid #1B813E44"><strong style="color:var(--green)">Key lesson:</strong> Root causes do not respect category boundaries. The fishbone helps you <em>find</em> causes; the Pareto helps you <em>focus</em>; the 5 Whys helps you <em>connect</em> them; the verification tests help you <em>prove</em> them.</div>’;
+return h;
 }
 
 function renderFishbone(){
-let h=`<p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5">We brainstormed <strong style="color:var(--text2)">30 potential causes</strong> across 6 standard Ishikawa categories. Tap each to explore.</p>
-
-  <div style="border-radius:8px;padding:10px 16px;margin-bottom:14px;text-align:center;background:linear-gradient(135deg,var(--red-bg),var(--crim-bg))">
-    <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:0.85;margin-bottom:2px;color:#fff">Effect</div>
-    <div style="font-size:13px;font-weight:600;color:#fff">Dinosaurs escaped → catastrophic failure</div>
-  </div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px">`;
-  CATEGORIES.forEach(cat=>{
-    const open=expandedCats[cat.name];
-    h+=`<div style="background:${open?'var(--card)':'#171D26'};border-radius:8px;overflow:hidden;border:1px solid ${open?cat.bg+'66':'var(--border)'}">
-      <div onclick="toggleCat('${cat.name}')" style="padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:8px">
-        <span style="font-size:15px">${cat.icon}</span>
-        <span style="font-size:13px;font-weight:600;color:${cat.color}">${cat.name}</span>
-        <span style="font-size:11px;color:var(--dim);margin-left:auto">${cat.causes.length}</span>
-        <span style="font-size:14px;color:var(--dim);transition:transform 0.2s;display:inline-block;transform:${open?'rotate(90deg)':'rotate(0)'}">›</span>
-      </div>${open?`<div style="padding:0 14px 12px;display:flex;flex-direction:column;gap:4px">${cat.causes.map(c=>`<div style="font-size:12px;color:#D1D5DB;padding:5px 8px 5px 12px;border-left:2px solid ${cat.bg}66;background:#161B2288;border-radius:0 4px 4px 0;line-height:1.4">${c.text}</div>`).join("")}</div>`:""}</div>`;
-  });
-  h+=`</div><div style="margin-top:14px;font-size:12px;color:var(--dim);text-align:center;font-style:italic">30 causes collected. Next: score and rank with Pareto analysis.</div>`;
-  return h;
+var h=’<p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5">We brainstormed <strong style="color:var(--text2)">30 potential causes</strong> across 6 standard Ishikawa categories. Tap each to explore.</p>’;
+h+=’<div style="border-radius:8px;padding:10px 16px;margin-bottom:14px;text-align:center;background:linear-gradient(135deg,var(--red-bg),var(--crim-bg))"><div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:0.85;margin-bottom:2px;color:#fff">Effect</div><div style="font-size:13px;font-weight:600;color:#fff">Dinosaurs escaped - catastrophic failure</div></div>’;
+h+=’<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px">’;
+for(var ci=0;ci<CATEGORIES.length;ci++){
+var cat=CATEGORIES[ci];
+var open=expandedCats[cat.name];
+h+=’<div style="background:'+(open?'var(--card)':'#171D26')+';border-radius:8px;overflow:hidden;border:1px solid '+(open?cat.bg+'66':'var(--border)')+'">’;
+h+=’<div onclick="toggleCat(\''+cat.name+'\')" style="padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:8px"><span style="font-size:15px">’+cat.icon+’</span><span style="font-size:13px;font-weight:600;color:'+cat.color+'">’+cat.name+’</span><span style="font-size:11px;color:var(--dim);margin-left:auto">’+cat.causes.length+’</span><span style="font-size:14px;color:var(--dim);display:inline-block;transform:'+(open?'rotate(90deg)':'rotate(0)')+'">›</span></div>’;
+if(open){
+h+=’<div style="padding:0 14px 12px;display:flex;flex-direction:column;gap:4px">’;
+for(var xi=0;xi<cat.causes.length;xi++){
+h+=’<div style="font-size:12px;color:#D1D5DB;padding:5px 8px 5px 12px;border-left:2px solid '+cat.bg+'66;background:#161B2288;border-radius:0 4px 4px 0;line-height:1.4">’+cat.causes[xi].text+’</div>’;
+}
+h+=’</div>’;
+}
+h+=’</div>’;
+}
+h+=’</div><div style="margin-top:14px;font-size:12px;color:var(--dim);text-align:center;font-style:italic">30 causes collected. Next: score and rank with Pareto analysis.</div>’;
+return h;
 }
 
 function renderPareto(){
-const items=PARETO.items,maxScore=items[0].score;
-const cutoffIdx=items.findIndex(c=>c.cumPct>=80);
-const aboveLine=cutoffIdx>=0?cutoffIdx+1:items.length;
-let h=`<p style="font-size:13px;color:var(--muted);margin-bottom:6px;line-height:1.5">Each cause scored by <strong style="color:var(--text2)">Impact (1–10) × Frequency (1–5)</strong>. The Pareto Principle says roughly 80% of the effect comes from ~20% of the causes.</p>
-
-  <div style="display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gold)"></div><span style="font-size:11px;color:var(--muted)">Above 80% line (vital few)</span></div>
-    <div style="display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:2px;background:var(--border)"></div><span style="font-size:11px;color:var(--muted)">Below 80% line (useful many)</span></div>
-  </div>
-  <div style="background:var(--card);border-radius:12px;padding:18px 16px;border:1px solid var(--border);margin-bottom:14px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:600;color:var(--text2)">Ranked Causes (Impact × Frequency)</div>
-      <button onclick="toggleCutoff()" style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;border:1px solid ${paretoShowCutoff?'var(--gold-bg)':'var(--border)'};background:${paretoShowCutoff?'#D4A01722':'transparent'};color:${paretoShowCutoff?'var(--gold)':'var(--dim)'};cursor:pointer;font-family:inherit">${paretoShowCutoff?'✓ 80% Line Shown':'Show 80% Line'}</button>
-    </div>`;
-  items.forEach((c,i)=>{
-    const isAbove=i<aboveLine;
-    const barColor=isAbove?c.catColor:'var(--border)';
-    const textColor=isAbove?'var(--text2)':'var(--dim)';
-    const w=paretoAnimated?`${Math.round((c.score/maxScore)*100)}%`:'0%';
-    const isExp=paretoExpandedItem===c.id;
-    h+=`<div><div onclick="toggleParetoItem('${c.id}')" class="pareto-bar-row" style="opacity:${isAbove?1:0.55}">
-      <div class="pareto-label" style="color:${textColor}">${c.text}</div>
-      <div class="pareto-track"><div class="pareto-fill" style="width:${w};background:${barColor}"></div></div>
-      <div class="pareto-score" style="color:${textColor}">${c.score}</div>
-    </div>`;
-    if(isExp){
-      h+=`<div style="margin:0 0 8px 0;background:#161B22;border-radius:6px;padding:10px 14px;border:1px solid var(--border);font-size:12px;line-height:1.6">
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px">
-          <span style="color:var(--muted)">Impact: <strong style="color:var(--text2)">${c.impact}/10</strong></span>
-          <span style="color:var(--muted)">Frequency: <strong style="color:var(--text2)">${c.freq}/5</strong></span>
-          <span style="color:var(--muted)">Score: <strong style="color:var(--text2)">${c.score}</strong></span>
-          <span style="color:var(--muted)">Cumulative: <strong style="color:${c.cumPct<=80?'var(--green)':'var(--dim)'}">${c.cumPct}%</strong></span>
-        </div>
-        <span style="font-size:10px;padding:2px 8px;border-radius:3px;background:${c.catBg}22;color:${c.catColor};font-weight:600">${c.category}</span>
-        ${c.selected?` <span style="font-size:10px;padding:2px 8px;border-radius:3px;background:var(--green-bg);color:#fff;font-weight:600;margin-left:4px">→ Selected for 5 Whys</span>`:''}
-      </div>`;
-    }
-    if(paretoShowCutoff&&i===cutoffIdx){
-      h+=`<div style="margin:6px 0 10px;display:flex;align-items:center;gap:8px">
-        <div style="flex:1;height:2px;background:var(--gold-bg);border-radius:1px"></div>
-        <span style="font-size:10px;font-weight:700;color:var(--gold);white-space:nowrap">80% CUMULATIVE — ${aboveLine} of ${items.length} causes</span>
-        <div style="flex:1;height:2px;background:var(--gold-bg);border-radius:1px"></div>
-      </div>`;
-    }
-    h+=`</div>`;
-  });
-  h+=`</div>`;
-  h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:14px">
-    <div style="background:var(--card);border-radius:8px;padding:14px 16px;border:1px solid var(--border);text-align:center"><div style="font-size:24px;font-weight:700;color:var(--gold)">${aboveLine}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">causes drive 80%+ of risk</div></div>
-    <div style="background:var(--card);border-radius:8px;padding:14px 16px;border:1px solid var(--border);text-align:center"><div style="font-size:24px;font-weight:700;color:var(--dim)">${items.length-aboveLine}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">remaining (lower priority)</div></div>
-    <div style="background:var(--card);border-radius:8px;padding:14px 16px;border:1px solid var(--border);text-align:center"><div style="font-size:24px;font-weight:700;color:var(--green)">${items.filter(c=>c.selected).length}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">selected for 5 Whys</div></div>
-  </div>`;
-  h+=`<div style="border-radius:8px;padding:12px 16px;font-size:13px;color:var(--muted);line-height:1.6;background:#D4A01718;border:1px solid #D4A01733">
-    <strong style="color:var(--gold)">The Pareto Principle in action:</strong> ${aboveLine} causes (out of 30) account for ~80% of the total risk score. These are the <em>vital few</em> we'll investigate with the 5 Whys. Click any bar to see its breakdown.
-  </div>`;
-  return h;
+var items=PARETO.items,maxScore=items[0].score;
+var cutoffIdx=-1;
+for(var i=0;i<items.length;i++){if(items[i].cumPct>=80){cutoffIdx=i;break;}}
+var aboveLine=cutoffIdx>=0?cutoffIdx+1:items.length;
+var h=’<p style="font-size:13px;color:var(--muted);margin-bottom:6px;line-height:1.5">Each cause scored by <strong style="color:var(--text2)">Impact (1-10) x Frequency (1-5)</strong>. The Pareto Principle says roughly 80% of the effect comes from ~20% of the causes.</p>’;
+h+=’<div style="display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gold)"></div><span style="font-size:11px;color:var(--muted)">Above 80% line (vital few)</span></div><div style="display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:2px;background:var(--border)"></div><span style="font-size:11px;color:var(--muted)">Below 80% line (useful many)</span></div></div>’;
+h+=’<div style="background:var(--card);border-radius:12px;padding:18px 16px;border:1px solid var(--border);margin-bottom:14px">’;
+h+=’<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div style="font-size:13px;font-weight:600;color:var(--text2)">Ranked Causes (Impact x Frequency)</div>’;
+h+=’<button onclick="toggleCutoff()" style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;border:1px solid '+(paretoShowCutoff?'var(--gold-bg)':'var(--border)')+';background:'+(paretoShowCutoff?'#D4A01722':'transparent')+';color:'+(paretoShowCutoff?'var(--gold)':'var(--dim)')+';cursor:pointer;font-family:inherit">’+(paretoShowCutoff?‘80% Line Shown’:‘Show 80% Line’)+’</button></div>’;
+for(var i=0;i<items.length;i++){
+var c=items[i];
+var isAbove=i<aboveLine;
+var barColor=isAbove?c.catColor:‘var(–border)’;
+var textColor=isAbove?‘var(–text2)’:‘var(–dim)’;
+var w=paretoAnimated?Math.round((c.score/maxScore)*100)+’%’:‘0%’;
+var isExp=paretoExpandedItem===c.id;
+h+=’<div><div onclick="toggleParetoItem(\''+c.id+'\')" class="pareto-bar-row" style="opacity:'+(isAbove?1:0.55)+'"><div class="pareto-label" style="color:'+textColor+'">’+c.text+’</div><div class="pareto-track"><div class="pareto-fill" style="width:'+w+';background:'+barColor+'"></div></div><div class="pareto-score" style="color:'+textColor+'">’+c.score+’</div></div>’;
+if(isExp){
+h+=’<div style="margin:0 0 8px 0;background:#161B22;border-radius:6px;padding:10px 14px;border:1px solid var(--border);font-size:12px;line-height:1.6"><div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px"><span style="color:var(--muted)">Impact: <strong style="color:var(--text2)">’+c.impact+’/10</strong></span><span style="color:var(--muted)">Frequency: <strong style="color:var(--text2)">’+c.freq+’/5</strong></span><span style="color:var(--muted)">Score: <strong style="color:var(--text2)">’+c.score+’</strong></span><span style="color:var(--muted)">Cumulative: <strong style="color:'+(c.cumPct<=80?'var(--green)':'var(--dim)')+'">’+c.cumPct+’%</strong></span></div><span style="font-size:10px;padding:2px 8px;border-radius:3px;background:'+c.catBg+'22;color:'+c.catColor+';font-weight:600">’+c.category+’</span>’;
+if(c.selected){h+=’ <span style="font-size:10px;padding:2px 8px;border-radius:3px;background:var(--green-bg);color:#fff;font-weight:600;margin-left:4px">Selected for 5 Whys</span>’;}
+h+=’</div>’;
+}
+if(paretoShowCutoff&&i===cutoffIdx){
+h+=’<div style="margin:6px 0 10px;display:flex;align-items:center;gap:8px"><div style="flex:1;height:2px;background:var(--gold-bg);border-radius:1px"></div><span style="font-size:10px;font-weight:700;color:var(--gold);white-space:nowrap">80% CUMULATIVE - ‘+aboveLine+’ of ‘+items.length+’ causes</span><div style="flex:1;height:2px;background:var(--gold-bg);border-radius:1px"></div></div>’;
+}
+h+=’</div>’;
+}
+h+=’</div>’;
+var selCount=0;for(var i=0;i<items.length;i++){if(items[i].selected)selCount++;}
+h+=’<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:14px"><div style="background:var(--card);border-radius:8px;padding:14px 16px;border:1px solid var(--border);text-align:center"><div style="font-size:24px;font-weight:700;color:var(--gold)">’+aboveLine+’</div><div style="font-size:11px;color:var(--muted);margin-top:2px">causes drive 80%+ of risk</div></div><div style="background:var(--card);border-radius:8px;padding:14px 16px;border:1px solid var(--border);text-align:center"><div style="font-size:24px;font-weight:700;color:var(--dim)">’+(items.length-aboveLine)+’</div><div style="font-size:11px;color:var(--muted);margin-top:2px">remaining (lower priority)</div></div><div style="background:var(--card);border-radius:8px;padding:14px 16px;border:1px solid var(--border);text-align:center"><div style="font-size:24px;font-weight:700;color:var(--green)">’+selCount+’</div><div style="font-size:11px;color:var(--muted);margin-top:2px">selected for 5 Whys</div></div></div>’;
+h+=’<div style="border-radius:8px;padding:12px 16px;font-size:13px;color:var(--muted);line-height:1.6;background:#D4A01718;border:1px solid #D4A01733"><strong style="color:var(--gold)">The Pareto Principle in action:</strong> ‘+aboveLine+’ causes (out of 30) account for ~80% of the total risk score. These are the <em>vital few</em> we will investigate with the 5 Whys. Click any bar to see its breakdown.</div>’;
+return h;
 }
 
 function renderPrioritize(){
-const sel=CATEGORIES.flatMap(c=>c.causes.filter(x=>x.selected).map(x=>({…x,category:c.name,catColor:c.color,catBg:c.bg})));
-let h=`<p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5">The Pareto analysis identified the vital few. Now we group these <strong style="color:var(--text2)">${sel.length} high-impact causes</strong> into 3 investigation lanes based on how they interact.</p>`;
-Object.entries(LANES).forEach(([key,lane])=>{
-const lc=sel.filter(c=>c.lane===key);
-h+=`<div style="margin-bottom:14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:0 4px"> <span style="font-size:15px">${lane.icon}</span> <span style="font-size:13px;font-weight:600;color:${lane.color}">${lane.name}</span> <span style="font-size:10px;color:var(--dim);font-family:'IBM Plex Mono',monospace;background:var(--card);padding:2px 8px;border-radius:4px">${lane.sources}</span> </div>${lc.map(c=>`<div style="background:var(--card);border-radius:6px;padding:8px 12px;border-left:3px solid ${lane.bg};display:flex;align-items:center;gap:10px;margin-bottom:4px">
-<span style="font-size:12px;color:#D1D5DB;flex:1;line-height:1.4">${c.text}</span>
-<span style="font-size:9px;color:${c.catColor};background:${c.catBg}22;padding:2px 7px;border-radius:3px;font-weight:600;white-space:nowrap;font-family:'IBM Plex Mono',monospace">${c.category}</span>
-</div>`).join("")}</div>`;
-});
-h+=`<div style="border-radius:8px;padding:12px 16px;font-size:13px;color:var(--muted);line-height:1.6;background:#D4A01718;border:1px solid #D4A01733;margin-top:6px">
-<strong style="color:var(--gold)">Notice:</strong> “People” causes appear in the Human lane. “Management” causes span all three. The fishbone finds causes; the Pareto ranks them; the lanes connect them by interaction.
-
-  </div>`;
-  return h;
+var sel=[];
+for(var ci=0;ci<CATEGORIES.length;ci++){
+var cat=CATEGORIES[ci];
+for(var xi=0;xi<cat.causes.length;xi++){
+if(cat.causes[xi].selected){
+sel.push(copyObj(cat.causes[xi],{category:cat.name,catColor:cat.color,catBg:cat.bg}));
+}}}
+var h=’<p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5">The Pareto analysis identified the vital few. Now we group these <strong style="color:var(--text2)">’+sel.length+’ high-impact causes</strong> into 3 investigation lanes based on how they interact.</p>’;
+var laneKeys=[“technical”,“environmental”,“human”];
+for(var li=0;li<laneKeys.length;li++){
+var key=laneKeys[li],lane=LANES[key];
+var lc=[];for(var si=0;si<sel.length;si++){if(sel[si].lane===key)lc.push(sel[si]);}
+h+=’<div style="margin-bottom:14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:0 4px"><span style="font-size:15px">’+lane.icon+’</span><span style="font-size:13px;font-weight:600;color:'+lane.color+'">’+lane.name+’</span><span style="font-size:10px;color:var(--dim);font-family:IBM Plex Mono,monospace;background:var(--card);padding:2px 8px;border-radius:4px">’+lane.sources+’</span></div>’;
+for(var ci=0;ci<lc.length;ci++){
+var c=lc[ci];
+h+=’<div style="background:var(--card);border-radius:6px;padding:8px 12px;border-left:3px solid '+lane.bg+';display:flex;align-items:center;gap:10px;margin-bottom:4px"><span style="font-size:12px;color:#D1D5DB;flex:1;line-height:1.4">’+c.text+’</span><span style="font-size:9px;color:'+c.catColor+';background:'+c.catBg+'22;padding:2px 7px;border-radius:3px;font-weight:600;white-space:nowrap;font-family:IBM Plex Mono,monospace">’+c.category+’</span></div>’;
+}
+h+=’</div>’;
+}
+h+=’<div style="border-radius:8px;padding:12px 16px;font-size:13px;color:var(--muted);line-height:1.6;background:#D4A01718;border:1px solid #D4A01733;margin-top:6px"><strong style="color:var(--gold)">Notice:</strong> People causes appear in the Human lane. Management causes span all three. The fishbone finds causes; the Pareto ranks them; the lanes connect them by interaction.</div>’;
+return h;
 }
 
 function renderFiveWhys(){
-const ld=LANES[activeLane];
-let h=`<div style="display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap">`;
-Object.entries(LANES).forEach(([key,lane])=>{
-const act=activeLane===key;
-h+=`<button onclick="setLane('${key}')" style="flex:1;min-width:90px;padding:9px 10px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;background:${act?lane.bg:'var(--card)'};color:${act?'#fff':'var(--dim)'}">${lane.icon} ${lane.name.split(" /")[0]}</button>`;
-});
-h+=`<button onclick="revealAll()" style="padding:9px 12px;border-radius:6px;border:1px solid var(--border);cursor:pointer;font-family:inherit;font-size:11px;font-weight:500;background:transparent;color:var(--dim)">Reveal All</button></div>`;
-h+=`<div style="border-radius:8px;padding:9px 14px;margin-bottom:14px;background:${ld.bg}22;border:1px solid ${ld.bg}44"><div style="font-size:13px;font-weight:600;color:${ld.color}">${ld.icon} ${ld.name}</div><div style="font-size:11px;color:var(--muted)">Sources: ${ld.sources}</div></div>`;
-ld.whys.forEach((why,i)=>{
-const rev=revealedWhys[`${activeLane}-${i}`],prev=i===0||revealedWhys[`${activeLane}-${i-1}`];
-h+=`<div style="background:var(--card);border-radius:8px;margin-bottom:8px;overflow:hidden;border:1px solid ${rev?ld.bg+'66':'var(--border)'};opacity:${prev?1:0.4};transition:all 0.3s"> <div style="padding:10px 14px;display:flex;align-items:center;gap:10px;${rev?'border-bottom:1px solid '+ld.bg+'33':''}"> <div style="width:24px;height:24px;border-radius:50%;background:${rev?ld.bg:'var(--border)'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">${i+1}</div> <div style="font-size:13px;font-weight:600;color:var(--text2);line-height:1.4">${why.q}</div> </div>${rev?`<div style="padding:10px 14px 12px 48px;font-size:13px;color:#D1D5DB;line-height:1.6">${why.a}</div>`:prev?`<div style="padding:8px 14px 10px 48px"><button onclick="revealWhy('${activeLane}',${i})" style="background:${ld.bg}33;color:${ld.color};border:1px solid ${ld.bg}66;border-radius:5px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Reveal Answer</button></div>`:""}</div>`;
-});
+var ld=LANES[activeLane];
+var h=’<div style="display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap">’;
+var laneKeys=[“technical”,“environmental”,“human”];
+for(var li=0;li<laneKeys.length;li++){
+var key=laneKeys[li],lane=LANES[key],act=activeLane===key;
+h+=’<button onclick="setLane(\''+key+'\')" style="flex:1;min-width:90px;padding:9px 10px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;background:'+(act?lane.bg:'var(--card)')+';color:'+(act?'#fff':'var(--dim)')+'">’+lane.icon+’ ‘+lane.name.split(” /”)[0]+’</button>’;
+}
+h+=’<button onclick="revealAll()" style="padding:9px 12px;border-radius:6px;border:1px solid var(--border);cursor:pointer;font-family:inherit;font-size:11px;font-weight:500;background:transparent;color:var(--dim)">Reveal All</button></div>’;
+h+=’<div style="border-radius:8px;padding:9px 14px;margin-bottom:14px;background:'+ld.bg+'22;border:1px solid '+ld.bg+'44"><div style="font-size:13px;font-weight:600;color:'+ld.color+'">’+ld.icon+’ ‘+ld.name+’</div><div style="font-size:11px;color:var(--muted)">Sources: ‘+ld.sources+’</div></div>’;
+for(var i=0;i<ld.whys.length;i++){
+var why=ld.whys[i];
+var rev=revealedWhys[activeLane+”-”+i];
+var prev=i===0||revealedWhys[activeLane+”-”+(i-1)];
+h+=’<div style="background:var(--card);border-radius:8px;margin-bottom:8px;overflow:hidden;border:1px solid '+(rev?ld.bg+'66':'var(--border)')+';opacity:'+(prev?1:0.4)+';transition:all 0.3s"><div style="padding:10px 14px;display:flex;align-items:center;gap:10px;'+(rev?'border-bottom:1px solid '+ld.bg+'33':'')+'">’;
+h+=’<div style="width:24px;height:24px;border-radius:50%;background:'+(rev?ld.bg:'var(--border)')+';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">’+(i+1)+’</div>’;
+h+=’<div style="font-size:13px;font-weight:600;color:var(--text2);line-height:1.4">’+why.q+’</div></div>’;
+if(rev){h+=’<div style="padding:10px 14px 12px 48px;font-size:13px;color:#D1D5DB;line-height:1.6">’+why.a+’</div>’;}
+else if(prev){h+=’<div style="padding:8px 14px 10px 48px"><button onclick="revealWhy(\''+activeLane+'\','+i+')" style="background:'+ld.bg+'33;color:'+ld.color+';border:1px solid '+ld.bg+'66;border-radius:5px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Reveal Answer</button></div>’;}
+h+=’</div>’;
+}
 return h;
 }
 
 function renderVerify(){
-let h=`<p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5">You've completed the 5 Whys. But how do you know you found the <strong style="color:var(--text2)">true</strong> root cause? Run these 4 tests. Toggle between our analysis and a <strong style="color:var(--crim)">common mistake</strong>.</p>`;
-h+=`<div style="display:flex;gap:4px;margin-bottom:14px">
-<button onclick="setVerify('good')" style="flex:1;padding:10px 12px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;background:${verifyMode==='good'?'var(--green-bg)':'var(--card)'};color:${verifyMode==='good'?'#fff':'var(--dim)'}">✅ Our 3-Lane Analysis</button>
-<button onclick="setVerify('bad')" style="flex:1;padding:10px 12px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;background:${verifyMode==='bad'?'var(--crim-bg)':'var(--card)'};color:${verifyMode==='bad'?'#fff':'var(--dim)'}">❌ Common Mistake</button>
-
-  </div>`;
-  if(verifyMode==="bad"){
-    h+=`<div style="border-radius:8px;padding:14px 16px;margin-bottom:14px;background:#C4453618;border:1px solid #C4453644">
-      <div style="font-size:12px;font-weight:600;color:var(--crim);margin-bottom:10px">❌ The Single-Lane "Nedry Chain"</div>
-      ${BAD_CHAIN.map((w,i)=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px"><div style="width:20px;height:20px;border-radius:50%;background:#C4453644;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--crim);flex-shrink:0;margin-top:1px">${i+1}</div><div><div style="font-size:11px;font-weight:600;color:var(--text)">${w.q}</div><div style="font-size:11px;color:var(--muted)">${w.a}</div></div></div>`).join("")}
-    </div>`;
-  }
-  h+=`<div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">${TESTS.map(t=>{
-    const r=verifyMode==='good'?t.goodResult:t.badResult;
-    return`<div style="flex:1;min-width:70px;border-radius:6px;padding:8px 10px;text-align:center;background:${r.pass?'#1B813E22':'#C4453622'};border:1px solid ${r.pass?'#1B813E44':'#C4453644'}"><div style="font-size:14px;margin-bottom:2px">${t.icon}</div><div style="font-size:10px;font-weight:700;color:${r.pass?'var(--pass)':'var(--fail)'}">${r.pass?'PASS':'FAIL'}</div></div>`;
-  }).join("")}</div>`;
-  TESTS.forEach(t=>{
-    const r=verifyMode==='good'?t.goodResult:t.badResult,exp=expandedTests[t.id];
-    h+=`<div style="background:var(--card);border-radius:8px;margin-bottom:8px;overflow:hidden;border:1px solid ${exp?t.color+'55':'var(--border)'}">
-      <div onclick="toggleTest('${t.id}')" style="padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px">
-        <span style="font-size:18px">${t.icon}</span>
-        <div style="flex:1"><div style="font-size:13px;font-weight:600;color:${t.color}">${t.name}</div><div style="font-size:11px;color:var(--dim)">${t.subtitle}</div></div>
-        <div style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:${r.pass?'#1B813E22':'#C4453622'};color:${r.pass?'var(--pass)':'var(--fail)'}">${r.pass?'PASS':'FAIL'}</div>
-        <span style="font-size:14px;color:var(--dim);transition:transform 0.2s;display:inline-block;transform:${exp?'rotate(90deg)':'rotate(0)'}">›</span>
-      </div>${exp?`<div style="padding:0 14px 14px;border-top:1px solid ${t.color}22">
-        <div style="padding:12px 0 10px"><div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:4px">The Question</div><div style="font-size:12.5px;color:var(--text);font-style:italic;line-height:1.5">${t.question}</div></div>
-        <div style="padding:0 0 10px"><div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px">How It Works</div><div style="font-size:12px;color:var(--muted);line-height:1.5">${t.howItWorks}</div></div>
-        <div style="border-radius:6px;padding:10px 12px;margin-bottom:10px;background:${r.pass?'#1B813E15':'#C4453615'};border:1px solid ${r.pass?'#1B813E44':'#C4453644'}">
-          <div style="font-size:11px;font-weight:600;color:${r.pass?'var(--pass)':'var(--fail)'};margin-bottom:4px">${verifyMode==='good'?'Our 3-Lane Analysis':'Nedry-Only Chain'}: ${r.pass?'PASS ✅':'FAIL ❌'}</div>
-          <div style="font-size:12px;color:#D1D5DB;line-height:1.5">${r.detail}</div>
-        </div>${!r.pass?`<div style="border-radius:6px;padding:10px 12px;background:#D4A01715;border:1px solid #D4A01733">
-          <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:4px">What should you do?</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.5"><strong style="color:var(--text)">It means:</strong> ${t.failMeans}</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.5;margin-top:4px"><strong style="color:var(--text)">Action:</strong> ${t.whatToDo}</div>
-        </div>`:''}
-      </div>`:''}</div>`;
-  });
-  h+=`<button onclick="toggleDecision()" style="width:100%;padding:12px 16px;border-radius:8px;margin-top:10px;border:1px solid #D4A01744;background:#D4A01718;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:var(--gold);text-align:left;display:flex;justify-content:space-between;align-items:center"><span>Quick Reference: Test Fails → What Tool To Use</span><span style="transform:${showDecisionTree?'rotate(90deg)':'rotate(0)'};transition:transform 0.2s;display:inline-block">›</span></button>`;
-  if(showDecisionTree){
-    h+=`<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">${DECISION_TREE.map(d=>`<div style="background:var(--card);border-radius:8px;padding:12px 14px;border-left:3px solid ${d.color};display:flex;gap:12px;align-items:flex-start">
-      <span style="font-size:18px;flex-shrink:0">${d.icon}</span>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:${d.color};margin-bottom:2px">${d.test}</div><div style="font-size:12px;color:var(--text);font-weight:600;margin-bottom:2px">${d.action}</div><div style="font-size:11px;color:var(--muted);line-height:1.5">${d.detail}</div></div>
-      <div style="font-size:10px;padding:3px 8px;border-radius:4px;background:var(--border);color:var(--muted);white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-weight:500;flex-shrink:0;align-self:center">${d.tool}</div>
-    </div>`).join("")}</div>`;
-  }
-  return h;
+var h=’<p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5">You have completed the 5 Whys. But how do you know you found the <strong style="color:var(--text2)">true</strong> root cause? Run these 4 tests. Toggle between our analysis and a <strong style="color:var(--crim)">common mistake</strong>.</p>’;
+h+=’<div style="display:flex;gap:4px;margin-bottom:14px"><button onclick="setVerify(\'good\')" style="flex:1;padding:10px 12px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;background:'+(verifyMode==='good'?'var(--green-bg)':'var(--card)')+';color:'+(verifyMode==='good'?'#fff':'var(--dim)')+'">Our 3-Lane Analysis</button><button onclick="setVerify(\'bad\')" style="flex:1;padding:10px 12px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;background:'+(verifyMode==='bad'?'var(--crim-bg)':'var(--card)')+';color:'+(verifyMode==='bad'?'#fff':'var(--dim)')+'">Common Mistake</button></div>’;
+if(verifyMode===“bad”){
+h+=’<div style="border-radius:8px;padding:14px 16px;margin-bottom:14px;background:#C4453618;border:1px solid #C4453644"><div style="font-size:12px;font-weight:600;color:var(--crim);margin-bottom:10px">The Single-Lane Nedry Chain</div>’;
+for(var i=0;i<BAD_CHAIN.length;i++){
+h+=’<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px"><div style="width:20px;height:20px;border-radius:50%;background:#C4453644;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--crim);flex-shrink:0;margin-top:1px">’+(i+1)+’</div><div><div style="font-size:11px;font-weight:600;color:var(--text)">’+BAD_CHAIN[i].q+’</div><div style="font-size:11px;color:var(--muted)">’+BAD_CHAIN[i].a+’</div></div></div>’;
+}
+h+=’</div>’;
+}
+h+=’<div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">’;
+for(var ti=0;ti<TESTS.length;ti++){
+var t=TESTS[ti],r=verifyMode===‘good’?t.goodResult:t.badResult;
+h+=’<div style="flex:1;min-width:70px;border-radius:6px;padding:8px 10px;text-align:center;background:'+(r.pass?'#1B813E22':'#C4453622')+';border:1px solid '+(r.pass?'#1B813E44':'#C4453644')+'"><div style="font-size:14px;margin-bottom:2px">’+t.icon+’</div><div style="font-size:10px;font-weight:700;color:'+(r.pass?'var(--pass)':'var(--fail)')+'">’+(r.pass?‘PASS’:‘FAIL’)+’</div></div>’;
+}
+h+=’</div>’;
+for(var ti=0;ti<TESTS.length;ti++){
+var t=TESTS[ti],r=verifyMode===‘good’?t.goodResult:t.badResult,exp=expandedTests[t.id];
+h+=’<div style="background:var(--card);border-radius:8px;margin-bottom:8px;overflow:hidden;border:1px solid '+(exp?t.color+'55':'var(--border)')+'">’;
+h+=’<div onclick="toggleTest(\''+t.id+'\')" style="padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px"><span style="font-size:18px">’+t.icon+’</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:'+t.color+'">’+t.name+’</div><div style="font-size:11px;color:var(--dim)">’+t.subtitle+’</div></div><div style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:'+(r.pass?'#1B813E22':'#C4453622')+';color:'+(r.pass?'var(--pass)':'var(--fail)')+'">’+(r.pass?‘PASS’:‘FAIL’)+’</div><span style="font-size:14px;color:var(--dim);display:inline-block;transform:'+(exp?'rotate(90deg)':'rotate(0)')+'">›</span></div>’;
+if(exp){
+h+=’<div style="padding:0 14px 14px;border-top:1px solid '+t.color+'22">’;
+h+=’<div style="padding:12px 0 10px"><div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:4px">The Question</div><div style="font-size:12.5px;color:var(--text);font-style:italic;line-height:1.5">’+t.question+’</div></div>’;
+h+=’<div style="padding:0 0 10px"><div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px">How It Works</div><div style="font-size:12px;color:var(--muted);line-height:1.5">’+t.howItWorks+’</div></div>’;
+h+=’<div style="border-radius:6px;padding:10px 12px;margin-bottom:10px;background:'+(r.pass?'#1B813E15':'#C4453615')+';border:1px solid '+(r.pass?'#1B813E44':'#C4453644')+'"><div style="font-size:11px;font-weight:600;color:'+(r.pass?'var(--pass)':'var(--fail)')+';margin-bottom:4px">’+(verifyMode===‘good’?‘Our 3-Lane Analysis’:‘Nedry-Only Chain’)+’: ‘+(r.pass?‘PASS’:‘FAIL’)+’</div><div style="font-size:12px;color:#D1D5DB;line-height:1.5">’+r.detail+’</div></div>’;
+if(!r.pass){
+h+=’<div style="border-radius:6px;padding:10px 12px;background:#D4A01715;border:1px solid #D4A01733"><div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:4px">What should you do?</div><div style="font-size:12px;color:var(--muted);line-height:1.5"><strong style="color:var(--text)">It means:</strong> ‘+t.failMeans+’</div><div style="font-size:12px;color:var(--muted);line-height:1.5;margin-top:4px"><strong style="color:var(--text)">Action:</strong> ‘+t.whatToDo+’</div></div>’;
+}
+h+=’</div>’;
+}
+h+=’</div>’;
+}
+h+=’<button onclick="toggleDecision()" style="width:100%;padding:12px 16px;border-radius:8px;margin-top:10px;border:1px solid #D4A01744;background:#D4A01718;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:var(--gold);text-align:left;display:flex;justify-content:space-between;align-items:center"><span>Quick Reference: Test Fails - What Tool To Use</span><span style="display:inline-block;transform:'+(showDecisionTree?'rotate(90deg)':'rotate(0)')+'">›</span></button>’;
+if(showDecisionTree){
+h+=’<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">’;
+for(var di=0;di<DECISION_TREE.length;di++){
+var d=DECISION_TREE[di];
+h+=’<div style="background:var(--card);border-radius:8px;padding:12px 14px;border-left:3px solid '+d.color+';display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;flex-shrink:0">’+d.icon+’</span><div style="flex:1"><div style="font-size:12px;font-weight:600;color:'+d.color+';margin-bottom:2px">’+d.test+’</div><div style="font-size:12px;color:var(--text);font-weight:600;margin-bottom:2px">’+d.action+’</div><div style="font-size:11px;color:var(--muted);line-height:1.5">’+d.detail+’</div></div><div style="font-size:10px;padding:3px 8px;border-radius:4px;background:var(--border);color:var(--muted);white-space:nowrap;font-family:IBM Plex Mono,monospace;font-weight:500;flex-shrink:0;align-self:center">’+d.tool+’</div></div>’;
+}
+h+=’</div>’;
+}
+return h;
 }
 
 function renderRootCause(){
-let h=`<div style="border-radius:12px;padding:20px 18px;margin-bottom:20px;background:linear-gradient(135deg,#E85D3A18 0%,#1B813E18 50%,#7B2D8E18 100%);border:1px solid #E85D3A33">
-<div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Converged Root Cause</div>
-<p style="font-size:14px;color:var(--text);line-height:1.7">${ROOT_CAUSE_TEXT}</p>
-
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:20px">
-    <div style="display:flex;gap:6px;width:100%;justify-content:center;flex-wrap:wrap">
-      ${Object.entries(LANES).map(([k,l])=>`<div style="border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;text-align:center;min-width:120px;background:${l.bg}22;border:1px solid ${l.bg}44;color:${l.color}">${l.icon} ${l.name.split(" /")[0]}</div>`).join("")}
-    </div>
-    <div style="font-size:18px;color:var(--dim);padding:5px 0">↓ ↓ ↓</div>
-    <div style="border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;text-align:center;background:#D4A01722;border:1px solid #D4A01744;color:var(--gold)">All lanes converge → Leadership culture + absence of holistic risk management</div>
-  </div>`;
-  h+=`<button onclick="toggleCM()" style="width:100%;padding:12px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;margin-bottom:10px;text-align:left;display:flex;justify-content:space-between;align-items:center;border:1px solid #1B813E44;background:#1B813E22;color:var(--green)"><span>Countermeasures</span><span style="transform:${showCountermeasures?'rotate(90deg)':'rotate(0)'};transition:transform 0.2s;display:inline-block">›</span></button>`;
-  if(showCountermeasures){
-    h+=COUNTERMEASURES.map(cm=>`<div style="background:var(--card);border-radius:8px;padding:12px 16px;margin-bottom:8px;border-left:3px solid ${cm.bg}">
-      <div style="font-size:13px;font-weight:600;color:${cm.color};margin-bottom:8px">${cm.lane}</div>
-      ${cm.items.map(item=>`<div style="font-size:12px;color:#D1D5DB;line-height:1.5;padding:4px 0 4px 12px;border-left:2px solid var(--border);margin-bottom:4px">${item}</div>`).join("")}
-    </div>`).join("");
-  }
-  h+=`<div style="background:var(--card);border-radius:8px;padding:16px 18px;border:1px solid var(--border);margin-top:${showCountermeasures?'12':'0'}px">
-    <div style="font-size:13px;font-weight:600;color:var(--gold);margin-bottom:8px">Training Takeaway</div>
-    <div style="font-size:13px;color:var(--muted);line-height:1.7">The fishbone cast a wide net (30 causes). The Pareto analysis scored and ranked them, revealing that ~20 causes drive 80% of the total risk. We grouped these vital few into 3 investigation lanes and drilled each with the 5 Whys — all three converged on the same systemic failures. The verification tests confirmed our analysis and showed how a single-lane approach passes the Therefore Test but fails the So What, Evidence, and Control Tests. A chain can feel logical and still be wrong. Always verify before declaring a root cause.</div>
-  </div>`;
-  return h;
+var h=’<div style="border-radius:12px;padding:20px 18px;margin-bottom:20px;background:linear-gradient(135deg,#E85D3A18 0%,#1B813E18 50%,#7B2D8E18 100%);border:1px solid #E85D3A33"><div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Converged Root Cause</div><p style="font-size:14px;color:var(--text);line-height:1.7">’+ROOT_CAUSE_TEXT+’</p></div>’;
+h+=’<div style="display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:20px"><div style="display:flex;gap:6px;width:100%;justify-content:center;flex-wrap:wrap">’;
+var laneKeys=[“technical”,“environmental”,“human”];
+for(var li=0;li<laneKeys.length;li++){
+var l=LANES[laneKeys[li]];
+h+=’<div style="border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;text-align:center;min-width:120px;background:'+l.bg+'22;border:1px solid '+l.bg+'44;color:'+l.color+'">’+l.icon+’ ‘+l.name.split(” /”)[0]+’</div>’;
+}
+h+=’</div><div style="font-size:18px;color:var(--dim);padding:5px 0">↓ ↓ ↓</div><div style="border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;text-align:center;background:#D4A01722;border:1px solid #D4A01744;color:var(--gold)">All lanes converge: Leadership culture + absence of holistic risk management</div></div>’;
+h+=’<button onclick="toggleCM()" style="width:100%;padding:12px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;margin-bottom:10px;text-align:left;display:flex;justify-content:space-between;align-items:center;border:1px solid #1B813E44;background:#1B813E22;color:var(--green)"><span>Countermeasures</span><span style="display:inline-block;transform:'+(showCountermeasures?'rotate(90deg)':'rotate(0)')+'">›</span></button>’;
+if(showCountermeasures){
+for(var ci=0;ci<COUNTERMEASURES.length;ci++){
+var cm=COUNTERMEASURES[ci];
+h+=’<div style="background:var(--card);border-radius:8px;padding:12px 16px;margin-bottom:8px;border-left:3px solid '+cm.bg+'"><div style="font-size:13px;font-weight:600;color:'+cm.color+';margin-bottom:8px">’+cm.lane+’</div>’;
+for(var ii=0;ii<cm.items.length;ii++){
+h+=’<div style="font-size:12px;color:#D1D5DB;line-height:1.5;padding:4px 0 4px 12px;border-left:2px solid var(--border);margin-bottom:4px">’+cm.items[ii]+’</div>’;
+}
+h+=’</div>’;
+}}
+h+=’<div style="background:var(--card);border-radius:8px;padding:16px 18px;border:1px solid var(--border);margin-top:'+(showCountermeasures?'12':'0')+'px"><div style="font-size:13px;font-weight:600;color:var(--gold);margin-bottom:8px">Training Takeaway</div><div style="font-size:13px;color:var(--muted);line-height:1.7">The fishbone cast a wide net (30 causes). The Pareto analysis scored and ranked them, revealing that about 20 causes drive 80% of the total risk. We grouped these vital few into 3 investigation lanes and drilled each with the 5 Whys - all three converged on the same systemic failures. The verification tests confirmed our analysis and showed how a single-lane approach passes the Therefore Test but fails the So What, Evidence, and Control Tests. A chain can feel logical and still be wrong. Always verify before declaring a root cause.</div></div>’;
+return h;
 }
 
 function renderNav(){
-const f=currentStep===0,l=currentStep===STEPS.length-1;
-return`<div style="display:flex;justify-content:space-between;margin-top:24px;gap:12px">
-<button onclick=“goStep(${currentStep-1})” ${f?‘disabled’:’’} style=“padding:10px 20px;border-radius:6px;font-family:inherit;font-size:13px;font-weight:600;cursor:${f?‘default’:‘pointer’};border:1px solid var(–border);background:transparent;color:${f?’#3A4451’:‘var(–muted)’}”>← Back</button>
-<button onclick=“goStep(${currentStep+1})” ${l?‘disabled’:’’} style=“padding:10px 20px;border-radius:6px;font-family:inherit;font-size:13px;font-weight:600;cursor:${l?‘default’:‘pointer’};border:none;background:${l?‘var(–border)’:‘var(–red-bg)’};color:#fff”>${l?‘Complete’:‘Next →’}</button>
-
-  </div>`;
+var f=currentStep===0,l=currentStep===STEPS.length-1;
+return ‘<div style="display:flex;justify-content:space-between;margin-top:24px;gap:12px"><button onclick=“goStep(’+(currentStep-1)+’)” ‘+(f?‘disabled’:’’)+’ style=“padding:10px 20px;border-radius:6px;font-family:inherit;font-size:13px;font-weight:600;cursor:’+(f?‘default’:‘pointer’)+’;border:1px solid var(–border);background:transparent;color:’+(f?’#3A4451’:‘var(–muted)’)+’”>Back</button><button onclick=“goStep(’+(currentStep+1)+’)” ‘+(l?‘disabled’:’’)+’ style=“padding:10px 20px;border-radius:6px;font-family:inherit;font-size:13px;font-weight:600;cursor:’+(l?‘default’:‘pointer’)+’;border:none;background:’+(l?‘var(–border)’:‘var(–red-bg)’)+’;color:#fff”>’+(l?‘Complete’:‘Next’)+’</button></div>’;
 }
 
 function toggleCat(n){expandedCats[n]=!expandedCats[n];render();}
 function setLane(l){activeLane=l;render();}
-function revealWhy(l,i){revealedWhys[`${l}-${i}`]=true;render();}
-function revealAll(){Object.keys(LANES).forEach(l=>LANES[l].whys.forEach((_,i)=>{revealedWhys[`${l}-${i}`]=true;}));render();}
+function revealWhy(l,i){revealedWhys[l+”-”+i]=true;render();}
+function revealAll(){var lk=[“technical”,“environmental”,“human”];for(var li=0;li<lk.length;li++){for(var i=0;i<LANES[lk[li]].whys.length;i++){revealedWhys[lk[li]+”-”+i]=true;}}render();}
 function setVerify(m){verifyMode=m;expandedTests={};render();}
 function toggleTest(id){expandedTests[id]=!expandedTests[id];render();}
 function toggleDecision(){showDecisionTree=!showDecisionTree;render();}
@@ -431,7 +391,7 @@ function toggleCutoff(){paretoShowCutoff=!paretoShowCutoff;render();}
 function toggleParetoItem(id){paretoExpandedItem=paretoExpandedItem===id?null:id;render();}
 
 render();
-setTimeout(()=>{if(currentStep===2){paretoAnimated=true;render();}},50);
+setTimeout(function(){if(currentStep===2){paretoAnimated=true;render();}},50);
 </script>
 
 </body>
